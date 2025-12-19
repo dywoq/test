@@ -1,4 +1,4 @@
 BasedOnStyle: llvm
 IndentWidth: 2
 IndentPPDirectives: AfterHash
-NamespaceIndentation: All
+NamespaceIndentation: None

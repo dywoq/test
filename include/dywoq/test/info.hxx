@@ -21,17 +21,17 @@
 #  if __cplusplus >= 202002LL
 
 namespace dywoq::test {
-  // Contains the information that is collected during tests
-  // and available after running them.
-  struct info {
-    bool has_failures = false;
-    std::uint32_t failures_count = 0;
-    
-    info() noexcept = default;
-    info(info &) noexcept = default;
-    info(info &&) noexcept = default;
-    info(const info &) noexcept = default;
-  };
+// Contains the information that is collected during tests
+// and available after running them.
+struct info {
+  bool has_failures = false;
+  std::uint32_t failures_count = 0;
+
+  info() noexcept = default;
+  info(info &) noexcept = default;
+  info(info &&) noexcept = default;
+  info(const info &) noexcept = default;
+};
 } // namespace dywoq::test
 
 #  endif

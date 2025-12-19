@@ -16,22 +16,19 @@
 #define _DYWOQ_TEST_INFO_HXX
 
 #ifdef __cplusplus
-#  include <cstdint>
 
 #  if __cplusplus >= 202002LL
+#include <atomic>
 
 namespace dywoq::test {
 inline namespace __v1 {
 // Contains the information that is collected during tests
 // and available after running them.
 struct info {
-  bool has_failures = false;
-  std::uint32_t failures_count = 0;
+  std::atomic_bool has_failures = false;
+  std::atomic_uint32_t failures_count = 0;
 
   info() noexcept = default;
-  info(info &) noexcept = default;
-  info(info &&) noexcept = default;
-  info(const info &) noexcept = default;
 };
 }
 } // namespace dywoq::test

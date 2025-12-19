@@ -21,6 +21,7 @@
 #  if __cplusplus >= 202002LL
 
 namespace dywoq::test {
+inline namespace __v1 {
 // Contains the information that is collected during tests
 // and available after running them.
 struct info {
@@ -32,6 +33,7 @@ struct info {
   info(info &&) noexcept = default;
   info(const info &) noexcept = default;
 };
+}
 } // namespace dywoq::test
 
 #  endif

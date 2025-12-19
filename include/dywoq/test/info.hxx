@@ -18,19 +18,19 @@
 #ifdef __cplusplus
 
 #  if __cplusplus >= 202002LL
-#include <atomic>
+#    include <atomic>
 
 namespace dywoq::test {
-inline namespace __v1 {
-// Contains the information that is collected during tests
-// and available after running them.
-struct info {
-  std::atomic_bool has_failures = false;
-  std::atomic_uint32_t failures_count = 0;
+  inline namespace __v1 {
+    // Contains the information that is collected during tests
+    // and available after running them.
+    struct info {
+      std::atomic_bool has_failures = false;
+      std::atomic_uint32_t failures_count = 0;
 
-  info() noexcept = default;
-};
-}
+      info() noexcept = default;
+    };
+  } // namespace __v1
 } // namespace dywoq::test
 
 #  endif

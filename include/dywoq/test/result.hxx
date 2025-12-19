@@ -21,30 +21,30 @@
 #    include <string>
 
 namespace dywoq::test {
-inline namespace __v1 {
+  inline namespace __v1 {
 
-// Represents the result kind.
-enum class result_kind : std::int8_t { error, success };
+    // Represents the result kind.
+    enum class result_kind : std::int8_t { error, success };
 
-// Represents the test case result params.
-struct result_params {
-  std::string message;
-};
+    // Represents the test case result params.
+    struct result_params {
+      std::string message;
+    };
 
-// Represents the test case result.
-// You can use it with `result_params` to customize its output.
-template <result_kind Kind> class result {
-private:
-  result_params params_;
+    // Represents the test case result.
+    // You can use it with `result_params` to customize its output.
+    template <result_kind Kind> class result {
+    private:
+      result_params params_;
 
-public:
-  result() noexcept : params_({}) {}
-  result(result_params params) noexcept : params_(params) {}
-  [[nodiscard]] constexpr result_kind kind() noexcept { return Kind; }
-  [[nodiscard]] const result_params &params() noexcept { return params_; }
-};
+    public:
+      result() noexcept : params_({}) {}
+      result(result_params params) noexcept : params_(params) {}
+      [[nodiscard]] constexpr result_kind kind() noexcept { return Kind; }
+      [[nodiscard]] const result_params &params() noexcept { return params_; }
+    };
 
-} // namespace __v1
+  } // namespace __v1
 } // namespace dywoq::test
 
 #  endif

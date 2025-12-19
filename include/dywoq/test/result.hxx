@@ -16,9 +16,9 @@
 #define _DYWOQ_TEST_RESULT_HXX
 
 #ifdef __cplusplus
-#  if __cplusplus >= 202002LL
-#    include <cstdint>
-#    include <string>
+#if __cplusplus >= 202002LL
+#include <cstdint>
+#include <string>
 
 namespace dywoq::test {
   inline namespace __v1 {
@@ -32,22 +32,24 @@ namespace dywoq::test {
     };
 
     // Represents the test case result.
-    // You can use it with `result_params` to customize its output.
-    template <result_kind Kind> class result {
+    // During initializing, take a note that default constructor
+    // automatically sets the result kind to `result_kind::success`.
+    class result {
     private:
       result_params params_;
+      result_kind kind_;
 
     public:
-      result() noexcept : params_({}) {}
-      result(result_params params) noexcept : params_(params) {}
-      [[nodiscard]] constexpr result_kind kind() noexcept { return Kind; }
+      result() noexcept : params_({}), kind_(result_kind::success) {}
+      result(result_params params, result_kind kind) noexcept : params_(params) {}
+      [[nodiscard]] constexpr result_kind kind() noexcept { return kind_; }
       [[nodiscard]] const result_params &params() noexcept { return params_; }
     };
 
   } // namespace __v1
 } // namespace dywoq::test
 
-#  endif
+#endif
 #endif
 
 #endif

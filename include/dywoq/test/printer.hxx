@@ -13,7 +13,6 @@
 namespace dywoq::test
 {
   // Represents the printer settings.
-  // WARNING: You can't change these settings during running tests.
   struct printer_settings
   {
     std::atomic_bool show_timestamp = false;
@@ -28,14 +27,14 @@ namespace dywoq::test
     std::string result_timestamp_str_() noexcept
     {
       return settings.show_timestamp.load()
-                 ? std::format("{:%Y-%m-%d %H:%M:%S}",
+                 ? std::format("{:%Y-%m-%d %H:%M:%MS} ",
                                std::chrono::system_clock::now())
                  : "";
     }
 
-    const char *result_message_str_(const result &result) noexcept
+    std::string result_message_str_(const result &result) noexcept
     {
-      return std::strlen(result.message) == 0 ? "<no message provided>"
+      return result.message.size() == 0 ? "<no message provided>"
                                               : result.message;
     }
 
@@ -44,17 +43,25 @@ namespace dywoq::test
       return result.kind == result_kind::success ? "[SUCCESS]" : "[FAILURE]";
     }
 
+    std::string result_location_str_(const result &result) noexcept
+    {
+      auto location = result.location;
+      return std::format("({} {}:{}:{})", location.function_name(),
+                         location.file_name(), location.line(),
+                         location.column());
+    }
+
   public:
     printer_settings settings = {};
 
-    constexpr printer() noexcept {}
+    printer() noexcept {}
 
     // Prints the test result into the console,
     // using the printer settings.
     void print(const result &result) noexcept
     {
-      std::cout << result_timestamp_str_() << " " << result_kind_str_(result)
-                << result_message_str_(result) << std::endl;
+      std::cout << result_timestamp_str_() << result_kind_str_(result) << " "
+                << result_message_str_(result) << " " << result_location_str_(result) << std::endl;
     }
   };
 } // namespace dywoq::test

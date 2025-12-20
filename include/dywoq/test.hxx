@@ -9,6 +9,7 @@
 #include "test/info.hxx"
 #include "test/printer.hxx"
 #include "test/result.hxx"
+#include "test/runner.hxx"
 
 #endif
 #endif

@@ -6,7 +6,6 @@
 
 namespace dywoq::test
 {
-  class context;
   class runner;
 } // namespace dywoq::test
 

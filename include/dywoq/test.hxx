@@ -4,13 +4,14 @@
 #ifdef __cplusplus
 #if __cplusplus >= 202002LL
 
+#include "test/assert.hxx"
+#include "test/category.hxx"
 #include "test/function_t.hxx"
 #include "test/fwd.hxx"
 #include "test/info.hxx"
 #include "test/printer.hxx"
 #include "test/result.hxx"
 #include "test/runner.hxx"
-#include "test/category.hxx"
 
 #endif
 #endif

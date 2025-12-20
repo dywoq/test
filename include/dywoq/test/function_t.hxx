@@ -3,7 +3,6 @@
 
 #ifdef __cplusplus
 #if __cplusplus >= 202002LL
-#include "fwd.hxx"
 #include "result.hxx"
 #include <functional>
 

@@ -14,11 +14,14 @@ namespace dywoq::test
   };
 
   // Represents the test case result.
-  template <result_kind Kind> struct result
+  struct result
   {
+    result_kind kind;
     const char *message;
-    constexpr result(const char *message) noexcept : message(message) {}
-    constexpr result_kind kind() noexcept { return Kind; }
+    constexpr result(const char *message, result_kind kind) noexcept
+        : message(message), kind(kind)
+    {
+    }
   };
 } // namespace dywoq::test
 

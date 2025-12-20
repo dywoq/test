@@ -33,16 +33,15 @@ namespace dywoq::test
                  : "";
     }
 
-    template <result_kind Kind>
-    const char *result_message_str_(const result<Kind> &result) noexcept
+    const char *result_message_str_(const result &result) noexcept
     {
       return std::strlen(result.message) == 0 ? "<no message provided>"
                                               : result.message;
     }
 
-    template <result_kind Kind> std::string result_kind_str_() noexcept
+    std::string result_kind_str_(const result &result) noexcept
     {
-      return Kind == result_kind::success ? "[SUCCESS]" : "[FAILURE]";
+      return result.kind == result_kind::success ? "[SUCCESS]" : "[FAILURE]";
     }
 
   public:
@@ -52,9 +51,9 @@ namespace dywoq::test
 
     // Prints the test result into the console,
     // using the printer settings.
-    template <result_kind Kind> void print(const result<Kind> &result) noexcept
+    void print(const result &result) noexcept
     {
-      std::cout << result_timestamp_str_() << " " << result_kind_str_<Kind>()
+      std::cout << result_timestamp_str_() << " " << result_kind_str_(result)
                 << result_message_str_(result) << std::endl;
     }
   };

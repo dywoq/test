@@ -9,7 +9,7 @@
 namespace dywoq::test
 {
   // Represents the test function.
-  using function_t = std::function<const result()>;
+  using function_t = std::function<result()>;
 } // namespace dywoq::test
 
 #endif

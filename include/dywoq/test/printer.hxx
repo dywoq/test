@@ -6,7 +6,6 @@
 #include "result.hxx"
 #include <atomic>
 #include <chrono>
-#include <cstring>
 #include <iostream>
 #include <string>
 
@@ -40,7 +39,10 @@ namespace dywoq::test
 
     std::string result_kind_str_(const result &result) noexcept
     {
-      return result.kind == result_kind::success ? "[SUCCESS]" : "[FAILURE]";
+      if (result.kind == result_kind::success) {
+        return "[SUCCESS]";
+      }
+      return "[FAILURE]";
     }
 
     std::string result_location_str_(const result &result) noexcept

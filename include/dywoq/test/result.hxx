@@ -29,7 +29,7 @@ namespace dywoq::test
 
     result(const std::string &message,
            const std::source_location &location) noexcept
-        : message(message), kind(result_kind::failure), location(location)
+        : message(message), kind(result_kind::success), location(location)
     {
     }
 

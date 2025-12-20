@@ -1,5 +1,5 @@
-#ifndef _DYWOQ_TEST_FUNCTION_HXX
-#define _DYWOQ_TEST_FUNCTION_HXX
+#ifndef _DYWOQ_TEST_INFO_HXX
+#define _DYWOQ_TEST_INFO_HXX
 
 #include <cstdint>
 #ifdef __cplusplus

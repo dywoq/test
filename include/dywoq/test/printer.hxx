@@ -34,12 +34,13 @@ namespace dywoq::test
     std::string result_message_str_(const result &result) noexcept
     {
       return result.message.size() == 0 ? "<no message provided>"
-                                              : result.message;
+                                        : result.message;
     }
 
     std::string result_kind_str_(const result &result) noexcept
     {
-      if (result.kind == result_kind::success) {
+      if (result.kind == result_kind::success)
+      {
         return "[SUCCESS]";
       }
       return "[FAILURE]";
@@ -63,7 +64,17 @@ namespace dywoq::test
     void print(const result &result) noexcept
     {
       std::cout << result_timestamp_str_() << result_kind_str_(result) << " "
-                << result_message_str_(result) << " " << result_location_str_(result) << std::endl;
+                << result_message_str_(result) << " "
+                << result_location_str_(result) << std::endl;
+    }
+
+    // Prints the test result along with the category name into the console,
+    // using the printer settings.
+    void print(const std::string &category_name, const result &result) noexcept
+    {
+      std::cout << category_name << ": " << result_timestamp_str_() << result_kind_str_(result) << " "
+                << result_message_str_(result) << " "
+                << result_location_str_(result) << std::endl;
     }
   };
 } // namespace dywoq::test

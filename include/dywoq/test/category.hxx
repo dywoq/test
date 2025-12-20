@@ -26,6 +26,24 @@ namespace dywoq::test
   public:
     category(const std::string &name) noexcept : name_(name) {}
 
+    category(const category &other)
+    {
+      name_ = other.name_;
+      tests_ = other.tests_;
+      info_ = other.info_;
+    }
+
+    category &operator=(const category &other)
+    {
+      name_ = other.name_;
+      tests_ = other.tests_;
+      info_ = other.info_;
+      return *this;
+    }
+
+    // Returns the category name.
+    std::string name() { return name_; }
+
     // Adds the test to the category.
     // If the category is currently working, the function does nothing.
     void add(const function_t &test) noexcept
@@ -37,15 +55,16 @@ namespace dywoq::test
       tests_.push_back(test);
     }
 
-    // Runs the tests categories, reporting any test results
-    // into the console.
-    // Depending on the result of tests, `run` returns either 0 as success or 1
-    // as failure.
-    int run() noexcept
+    // Runs the tests categories and its sub-categories, reporting any test
+    // results into the console. Depending on the result of tests, `run` returns
+    // either 0 as success or 1 as failure.
+    int run(printer_settings &settings, int order) noexcept
     {
+      printer_.settings = settings;
 
       working_.store(true);
       int code = 0;
+      int current_order = 0;
       for (auto &test : tests_)
       {
         auto result = test();
@@ -57,16 +76,18 @@ namespace dywoq::test
           code = 1;
         }
       }
+
       working_.store(false);
 
       if (info_.has_failures)
       {
-        std::cout << name_ << ": Detected" << info_.failures_count.load()
-                  << " failures, returning code 1" << std::endl;
+        std::cout << "\"" << name_ << "\": Detected "
+                  << info_.failures_count.load() << " failures, returning code "
+                  << code << std::endl;
       }
       else
       {
-        std::cout << name_ << ": No failures detected" << std::endl;
+        std::cout << "\"" << name_ << "\": No failures detected" << std::endl;
       }
       return code;
     }

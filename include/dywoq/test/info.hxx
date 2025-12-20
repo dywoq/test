@@ -13,6 +13,21 @@ namespace dywoq::test
   {
     std::atomic_bool has_failures = false;
     std::atomic_uint32_t failures_count = 0;
+
+    info() {}
+
+    info(const info &other)
+    {
+      has_failures.store(other.has_failures.load());
+      failures_count.store(other.failures_count.load());
+    }
+
+    info &operator=(const info &other)
+    {
+      has_failures.store(other.has_failures.load());
+      failures_count.store(other.failures_count.load());
+      return *this;
+    }
   };
 } // namespace dywoq::test
 

@@ -10,6 +10,7 @@
 #include "test/printer.hxx"
 #include "test/result.hxx"
 #include "test/runner.hxx"
+#include "test/category.hxx"
 
 #endif
 #endif

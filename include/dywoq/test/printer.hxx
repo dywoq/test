@@ -16,7 +16,17 @@ namespace dywoq::test
   {
     std::atomic_bool show_timestamp = false;
 
-    constexpr printer_settings() noexcept {}
+    printer_settings() noexcept {}
+    printer_settings(const printer_settings &other) noexcept
+    {
+      show_timestamp.store(other.show_timestamp.load());
+    }
+
+    printer_settings &operator=(const printer_settings &other) noexcept
+    {
+      show_timestamp.store(other.show_timestamp.load());
+      return *this;
+    }
   };
 
   // Represents the test results printer.
@@ -26,7 +36,7 @@ namespace dywoq::test
     std::string result_timestamp_str_() noexcept
     {
       return settings.show_timestamp.load()
-                 ? std::format("{:%Y-%m-%d %H:%M:%MS} ",
+                 ? std::format("{:%Y-%m-%d %H:%M:%S} ",
                                std::chrono::system_clock::now())
                  : "";
     }
@@ -59,6 +69,8 @@ namespace dywoq::test
 
     printer() noexcept {}
 
+    printer(const printer &other) noexcept = default;
+
     // Prints the test result into the console,
     // using the printer settings.
     void print(const result &result) noexcept
@@ -72,7 +84,8 @@ namespace dywoq::test
     // using the printer settings.
     void print(const std::string &category_name, const result &result) noexcept
     {
-      std::cout << category_name << ": " << result_timestamp_str_() << result_kind_str_(result) << " "
+      std::cout << "\"" << category_name << "\": " << result_timestamp_str_()
+                << result_kind_str_(result) << " "
                 << result_message_str_(result) << " "
                 << result_location_str_(result) << std::endl;
     }

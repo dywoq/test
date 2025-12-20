@@ -4,12 +4,18 @@
 #ifdef __cplusplus
 #if __cplusplus >= 202002LL
 
-namespace dywoq::test {
+namespace dywoq::test
+{
   // Represents the result kind.
-  enum class result_kind { success, failure };
+  enum class result_kind
+  {
+    success,
+    failure
+  };
 
   // Represents the test case result.
-  template <result_kind Kind> struct result {
+  template <result_kind Kind> struct result
+  {
     const char *message;
     constexpr result(const char *message) noexcept : message(message) {}
     constexpr result_kind kind() noexcept { return Kind; }

@@ -34,7 +34,7 @@ namespace dywoq::test
     }
 
     // Returns the printer settings.
-    printer_settings &printer_settings() noexcept { return printer_settings_; }
+    printer_settings &get_printer_settings() noexcept { return printer_settings_; }
 
     int run() noexcept
     {
